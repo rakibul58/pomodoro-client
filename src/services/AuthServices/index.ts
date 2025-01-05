@@ -65,8 +65,10 @@ export const getCurrentUser = async () => {
   if (accessToken) {
     decodedToken = await jwtDecode(accessToken);
 
+    const { data } = await getUserProfile();
+
     return {
-      ...decodedToken,
+      ...data,
     };
   }
 
@@ -85,6 +87,16 @@ export const changePassword = async (payload: FieldValues) => {
 export const updateProfile = async (payload: FieldValues) => {
   try {
     const { data } = await axiosInstance.put("/users/profile", payload);
+    return data;
+  } catch (error: any) {
+    console.log(error.response);
+    throw new Error(error);
+  }
+};
+
+export const getUserProfile = async () => {
+  try {
+    const { data } = await axiosInstance.get("/users/profile");
     return data;
   } catch (error: any) {
     throw new Error(error);

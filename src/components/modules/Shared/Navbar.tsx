@@ -97,7 +97,7 @@ const Navbar = () => {
                   <UserAvatarDropdown
                     user={user}
                     onLogout={handleLogout}
-                    image={user?.avatarImg || ""}
+                    image={user?.avatarUrl || ""}
                   />
                 ) : (
                   <Link href="/login">

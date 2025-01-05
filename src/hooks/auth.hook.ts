@@ -9,6 +9,7 @@ import {
   updateProfile,
 } from "@/services/AuthServices";
 import { toast } from "sonner";
+import { useUser } from "@/context/user.provider";
 
 export const useUserLogin = () => {
   const queryClient = useQueryClient();
@@ -53,14 +54,15 @@ export const useUserChangePassword = () => {
 };
 
 export const useUpdateUser = () => {
+  const {setUser} = useUser()
   return useMutation<any, Error, FieldValues>({
     mutationKey: ["UPDATE_PROFILE"],
     mutationFn: async (payload) => await updateProfile(payload),
     onSuccess: () => {
-      toast.success("Customer Updated successfully.");
+      toast.success("User Updated successfully.");
     },
     onError: (error) => {
-      toast.error("Failed to Update Customer.");
+      toast.error("Failed to Update user.");
     },
   });
 };

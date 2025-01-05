@@ -1,9 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-"use client"
+"use client";
 
 import React, { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 import { motion } from "motion/react";
 import { FieldValues, SubmitHandler } from "react-hook-form";
 import VForm from "@/components/form/VForm";
@@ -11,7 +10,6 @@ import { Button } from "@/components/ui/button";
 import VInput from "@/components/form/VInput";
 import { Camera, X } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import VTextArea from "@/components/form/VTextArea";
 import { useImageUpload } from "@/hooks/imageUpload.hook";
 import Image from "next/image";
 import Loading from "@/components/modules/Shared/LoadingBlur";
@@ -19,23 +17,15 @@ import { useUser } from "@/context/user.provider";
 import { Card, CardContent } from "@/components/ui/card";
 import { toast } from "sonner";
 import { z } from "zod";
-import { useUpdateCustomer } from "@/hooks/auth.hook";
+import { useUpdateUser } from "@/hooks/auth.hook";
 
-const updateCustomerValidationSchema = z.object({
+const updateUserValidationSchema = z.object({
   name: z.string().min(1, "Name is required"),
   email: z.string().email("Invalid email address"),
-  phone: z.string().min(1, "Phone number is required"),
-  address: z.string().min(1, "Address is required"),
 });
 
 export default function UpdateProfile() {
-  const router = useRouter();
-  const {
-    user,
-    setIsLoading: setUserLoading,
-    isLoading: userLoading,
-  } = useUser();
-  const [isUpdating, setIsUpdating] = useState(false);
+  const { user, setIsLoading: userLoading } = useUser();
 
   const {
     previewUrl,
@@ -48,33 +38,22 @@ export default function UpdateProfile() {
   } = useImageUpload();
 
   useEffect(() => {
-    if (user?.user?.profileImg) {
-      setPreviewUrl(user.user.profileImg);
+    if (user?.avatarUrl) {
+      setPreviewUrl(user?.avatarUrl);
     }
   }, [user, setPreviewUrl]);
 
-  const { mutate: updateCustomer, isPending } = useUpdateCustomer();
+  const { mutate: updateUser, isPending } = useUpdateUser();
 
-  const handleUpdateProfile: SubmitHandler<FieldValues> = (data) => {
-    setIsUpdating(true);
-    try {
-      const updateData = {
-        name: data.name,
-        phone: data.phone,
-        address: data.address,
-        profileImg: uploadedImageUrl || user?.customer?.profileImg,
-      };
+  const handleUpdateProfile: SubmitHandler<FieldValues> = async (data) => {
+    const updateData = {
+      name: data.name,
+      avatarUrl: uploadedImageUrl || user?.avatarUrl || "",
+    };
 
-      // console.log({updateData});
-
-      updateCustomer(updateData);
-      setUserLoading(true);
-      router.refresh();
-    } catch (error: any) {
-      toast.error("Failed to update profile");
-    } finally {
-      setIsUpdating(false);
-    }
+    console.log({updateData});
+    updateUser(updateData);
+    userLoading(true);
   };
 
   return (
@@ -84,7 +63,7 @@ export default function UpdateProfile() {
         animate={{ opacity: 1, y: 0 }}
         className="w-full"
       >
-        {(isUpdating || isPending || userLoading) && <Loading />}
+        {isPending && <Loading />}
 
         <div className="p-6">
           <div className="mb-8">
@@ -109,7 +88,7 @@ export default function UpdateProfile() {
                       <>
                         <div className="relative w-full h-full">
                           <Image
-                            src={previewUrl || user?.user?.profileImg}
+                            src={previewUrl || user?.avatarUrl}
                             alt="Profile Preview"
                             fill
                             className="rounded-full object-cover"
@@ -154,15 +133,15 @@ export default function UpdateProfile() {
             {/* Profile Form Card */}
             <Card className="lg:col-span-2">
               <CardContent className="p-6">
-                <h3 className="text-xl font-semibold mb-6">Personal Information</h3>
+                <h3 className="text-xl font-semibold mb-6">
+                  Personal Information
+                </h3>
                 <VForm
-                  resolver={zodResolver(updateCustomerValidationSchema)}
+                  resolver={zodResolver(updateUserValidationSchema)}
                   onSubmit={handleUpdateProfile}
                   defaultValues={{
-                    name: user?.user?.name || "",
-                    email: user?.user?.email || "",
-                    phone: user?.user?.phone || "",
-                    address: user?.user?.address || "",
+                    name: user?.name || "",
+                    email: user?.email || "",
                   }}
                 >
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -181,24 +160,11 @@ export default function UpdateProfile() {
                       placeholder="Enter your Email"
                     />
 
-                    <VInput
-                      label="Phone"
-                      name="phone"
-                      type="text"
-                      placeholder="Enter your phone"
-                    />
-
-                    <VTextArea
-                      label="Address"
-                      name="address"
-                      placeholder="Enter your Address"
-                    />
-
                     <div className="md:col-span-2">
                       <Button
                         type="submit"
                         className="w-full md:w-auto"
-                        disabled={isUpdating || isUploading}
+                        disabled={isUploading}
                       >
                         Save Changes
                       </Button>

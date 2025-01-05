@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Store } from "lucide-react";
+import { Timer } from "lucide-react";
 
 import {
   Sidebar,
@@ -23,19 +23,19 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <SidebarContent>
           <Link href="/" className="flex items-center gap-2 font-bold">
             <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-              <Store />
+              <Timer className="text-primary" />
               <div className="grid flex-1 text-left text-sm leading-tight">
-                <h1 className="font-serif italic text-lg truncate">Vendozy</h1>
+                <h1 className="text-lg truncate">Pomodoro</h1>
               </div>
             </div>
           </Link>
         </SidebarContent>
       </SidebarHeader>
       <SidebarContent>
-        <NavMain role={user?.role} user={user?.user} />
+        <NavMain />
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={user} role={user?.role} image={user?.avatarImg} />
+        <NavUser user={user} image={user?.avatarUrl} />
       </SidebarFooter>
       <SidebarRail />
     </Sidebar>

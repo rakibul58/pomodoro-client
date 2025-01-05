@@ -2,22 +2,7 @@
 "use client";
 
 import { SidebarGroup, SidebarMenuButton } from "@/components/ui/sidebar";
-import {
-  Tag,
-  Package,
-  ShoppingCart,
-  Users,
-  LucideIcon,
-  View,
-  User,
-  LayoutDashboardIcon,
-  Home,
-  Key,
-  MessageCircleReply,
-  Newspaper,
-  HomeIcon,
-  BadgePercent,
-} from "lucide-react";
+import { LucideIcon, User, LayoutDashboardIcon } from "lucide-react";
 import Link from "next/link";
 
 // Define route types for each role
@@ -27,131 +12,20 @@ interface RouteItem {
   label: string;
 }
 
-const adminRoutes: RouteItem[] = [
+const routes: RouteItem[] = [
   {
-    href: "/admin/dashboard",
+    href: "/dashboard/overview",
     icon: LayoutDashboardIcon,
     label: "Dashboard",
   },
   {
-    href: "/admin/manage-categories",
-    icon: Tag,
-    label: "Manage Categories",
-  },
-  {
-    href: "/admin/manage-products",
-    icon: Package,
-    label: "Manage Products",
-  },
-  {
-    href: "/admin/shops",
-    icon: HomeIcon,
-    label: "Shop Management",
-  },
-  {
-    href: "/admin/customers",
-    icon: Users,
-    label: "Customer Management",
-  },
-  {
-    href: "/admin/manage-coupons",
-    icon: BadgePercent,
-    label: "Coupon Management",
-  },
-  {
-    href: "/admin/newsletters",
-    icon: Newspaper,
-    label: "Newsletters",
-  },
-  {
-    href: "/admin/orders",
-    icon: ShoppingCart,
-    label: "Orders",
-  },
-  {
-    href: "/admin/reviews",
-    icon: MessageCircleReply,
-    label: "Reviews",
-  },
-];
-
-const vendorRoutes: RouteItem[] = [
-  {
-    href: "/vendor/dashboard",
-    icon: LayoutDashboardIcon,
-    label: "Dashboard",
-  },
-  {
-    href: "/vendor",
-    icon: Home,
-    label: "Shop",
-  },
-  {
-    href: "/vendor/manage-products",
-    icon: Package,
-    label: "Manage Products",
-  },
-  {
-    href: "/vendor/orders",
-    icon: ShoppingCart,
-    label: "Orders",
-  },
-  {
-    href: "/vendor/reviews",
-    icon: MessageCircleReply,
-    label: "Reviews",
-  },
-  {
-    href: "/vendor/change-password",
-    icon: Key,
-    label: "Change Password",
-  },
-];
-
-const customerRoutes: RouteItem[] = [
-  {
-    href: "/customer/dashboard",
-    icon: LayoutDashboardIcon,
-    label: "Dashboard",
-  },
-  {
-    href: "/customer",
+    href: "/dashboard",
     icon: User,
     label: "Profile",
   },
-  {
-    href: "/customer/manage-orders",
-    icon: ShoppingCart,
-    label: "Manage Orders",
-  },
-  {
-    href: "/customer/recent-view",
-    icon: View,
-    label: "Recent Views",
-  },
 ];
 
-export function NavMain({
-  role,
-  user,
-}: {
-  role: "ADMIN" | "CUSTOMER" | "VENDOR";
-  user: any;
-}) {
-  // Select routes based on role
-  const routes = (() => {
-    switch (role) {
-      case "ADMIN":
-        return adminRoutes;
-      case "VENDOR":
-        return user.isOnboarded ? vendorRoutes : [];
-      case "CUSTOMER":
-        return customerRoutes;
-      default:
-        return [];
-    }
-  })();
-
+export function NavMain() {
   return (
     <SidebarGroup className="mt-6 space-y-2">
       {routes.map((route: RouteItem) => (

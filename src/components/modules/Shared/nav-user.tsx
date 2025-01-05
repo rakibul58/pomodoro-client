@@ -34,11 +34,10 @@ interface UserAvatarDropdownProps {
     name: string;
     email: string;
   };
-  role: string;
   image?: string;
 }
 
-export function NavUser({ user, role, image }: UserAvatarDropdownProps) {
+export function NavUser({ user, image }: UserAvatarDropdownProps) {
   const { isMobile } = useSidebar();
 
   const router = useRouter();
@@ -125,7 +124,7 @@ export function NavUser({ user, role, image }: UserAvatarDropdownProps) {
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <Link href={`/${role?.toLowerCase()}/change-password`}>
+              <Link href={`/dashboard/change-password`}>
                 <DropdownMenuItem>
                   <KeyIcon />
                   Change Password

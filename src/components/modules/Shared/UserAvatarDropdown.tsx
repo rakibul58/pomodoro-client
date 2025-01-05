@@ -29,7 +29,7 @@ export const UserAvatarDropdown: React.FC<UserAvatarDropdownProps> = ({
 }) => {
   const router = useRouter();
   const handleDashboardNavigation = () => {
-    router.push("/dashboard");
+    router.push("/dashboard/overview");
   };
 
   const getInitials = (name: string) => {
