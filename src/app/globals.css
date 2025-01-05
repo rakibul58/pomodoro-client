@@ -1,0 +1,146 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+@layer base {
+  :root {
+    /* Light Mode - Focused, Productive Palette */
+    --background: 0 0% 100%;
+    /* Clean white for focus */
+    --foreground: 240 10% 20%;
+    /* Clear, readable text */
+
+    /* Primary: Tomato Red (Pomodoro themed) */
+    --primary: 10 80% 63%;
+    /* Energetic but not harsh */
+    --primary-foreground: 0 0% 100%;
+
+    /* Secondary: Restful Blue */
+    --secondary: 220 40% 92%;
+    /* Calm break period color */
+    --secondary-foreground: 220 20% 30%;
+
+    /* Accent: Fresh Mint */
+    --accent: 160 40% 70%;
+    /* Completion/success color */
+    --accent-foreground: 160 50% 20%;
+
+    /* Destructive: Muted Red */
+    --destructive: 0 70% 70%;
+    /* For canceling/stopping timer */
+    --destructive-foreground: 0 0% 100%;
+
+    /* Supporting Colors */
+    --muted: 220 20% 94%;
+    /* Subtle backgrounds */
+    --muted-foreground: 220 10% 45%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 20%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 20%;
+
+    --border: 220 20% 88%;
+    --input: 220 20% 85%;
+    --ring: 10 80% 63%;
+    /* Matches primary */
+
+    --radius: 0.75rem;
+
+    /* Progress/Timer Colors */
+    --chart-1: 10 80% 63%;
+    /* Work period */
+    --chart-2: 220 40% 70%;
+    /* Short break */
+    --chart-3: 160 40% 70%;
+    /* Long break */
+    --chart-4: 45 70% 75%;
+    /* Progress */
+    --chart-5: 280 40% 75%;
+    /* Stats/analytics */
+
+    /* Sidebar - keeping consistent with main theme */
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5% 26%;
+    --sidebar-primary: 10 80% 63%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 220 40% 92%;
+    --sidebar-accent-foreground: 240 5% 26%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 10 80% 63%;
+  }
+
+  .dark {
+    /* Dark Mode - Easy on the eyes for long focus sessions */
+    --background: 240 10% 12%;
+    /* Deep, non-harsh background */
+    --foreground: 0 0% 95%;
+
+    /* Dark mode primary: Softer tomato */
+    --primary: 10 70% 55%;
+    --primary-foreground: 0 0% 98%;
+
+    /* Calming secondary for breaks */
+    --secondary: 220 40% 20%;
+    --secondary-foreground: 0 0% 90%;
+
+    /* Success/completion accent */
+    --accent: 160 40% 40%;
+    --accent-foreground: 0 0% 95%;
+
+    /* Muted destructive */
+    --destructive: 0 70% 50%;
+    --destructive-foreground: 0 0% 100%;
+
+    --muted: 240 10% 18%;
+    --muted-foreground: 240 5% 75%;
+
+    --card: 240 10% 12%;
+    --card-foreground: 0 0% 95%;
+
+    --popover: 240 10% 12%;
+    --popover-foreground: 0 0% 95%;
+
+    --border: 240 10% 20%;
+    --input: 240 10% 24%;
+    --ring: 10 70% 55%;
+
+    /* Dark mode progress/timer colors */
+    --chart-1: 10 70% 55%;
+    --chart-2: 220 40% 45%;
+    --chart-3: 160 40% 40%;
+    --chart-4: 45 60% 45%;
+    --chart-5: 280 40% 45%;
+
+    /* Dark sidebar */
+    --sidebar-background: 240 10% 10%;
+    --sidebar-foreground: 240 5% 95%;
+    --sidebar-primary: 10 70% 55%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 10% 16%;
+    --sidebar-accent-foreground: 240 5% 95%;
+    --sidebar-border: 240 10% 16%;
+    --sidebar-ring: 10 70% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
