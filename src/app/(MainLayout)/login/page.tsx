@@ -162,15 +162,6 @@ export default function Login() {
               />
             </motion.div>
 
-            <div className="flex items-center justify-end">
-              <Link
-                href="/forget-password"
-                className="text-sm text-primary hover:text-primary/80 mb-6"
-              >
-                Forgot Password?
-              </Link>
-            </div>
-
             <Button
               className="w-full py-6 text-lg font-semibold"
               size="lg"

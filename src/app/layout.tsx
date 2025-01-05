@@ -17,10 +17,11 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Vendozy - Your Ultimate Online Shopping Destination",
+  title: "Pomodoro - Your Ultimate Time Management App",
   description:
-    "Discover a seamless online shopping experience with Vendozy! Shop from a variety of vendors offering unique products, explore personalized recommendations, and enjoy exclusive deals. Whether you're a customer seeking quality items, a vendor managing your shop, or an admin overseeing the platform, Vendozy is built for everyone. Secure payments, responsive design, and advanced filtering make it your go-to e-commerce platform.",
+    "Boost your productivity with Pomodoro, the ultimate time management app! Manage your tasks effectively, stay focused, and take breaks at the right time. Whether you're studying, working, or just trying to stay organized, Pomodoro is designed to help you achieve your goals. Enjoy a sleek interface, customizable session lengths, and insightful productivity stats for an optimized workflow.",
 };
+
 
 export default function RootLayout({
   children,

@@ -28,10 +28,11 @@ export default function Signup() {
 
   const handleCreateUser: SubmitHandler<FieldValues> = (data) => {
     const registrationData = {
-      name: data.name,
-      email: data.email,
+      user: {
+        name: data.name,
+        email: data.email,
+      },
       password: data.password,
-      timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
     };
     handleUserRegistration(registrationData);
     userLoading(true);
@@ -39,7 +40,7 @@ export default function Signup() {
 
   useEffect(() => {
     if (!isPending && isSuccess && user) {
-      router.push("/dashboard");
+      router.push("/");
     }
   }, [isPending, isSuccess, user, router]);
 
@@ -101,7 +102,7 @@ export default function Signup() {
           transition={{ duration: 0.4 }}
           className="w-full max-w-md space-y-8"
         >
-          <div className="text-center mb-8">
+          <div className="mb-8">
             <h3 className="text-3xl font-bold text-gray-800 dark:text-gray-200">
               Create Account
             </h3>
